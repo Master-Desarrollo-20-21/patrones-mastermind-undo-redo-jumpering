@@ -18,9 +18,29 @@ public class Menu {
                 console.writeln((i+1) + ". " + this.commandList.get(i).getTitle() );
             }
         }
+//
+//
+//
+//
+//
+//        int option;
+//        boolean error;
+//        do {
+//            error = false;
+//            console.writeln();
+//            for (int i = 0; i < this.commandList.size(); i++) {
+//                console.writeln((i + 1) + ") " + this.commandList.get(i).getTitle());
+//            }
+//            option = console.readInt("aquí tú número: ");
+//        } while (error);
+//        this.commandList.get(option).execute();
+
+
+
+
     }
 
-    public void addComand(Command command){
+    protected void addComand(Command command){
         this.commandList.add(command);
     }
 }
