@@ -12,6 +12,8 @@ class StartView extends WithConsoleView {
 		startController.start();
 		this.console.writeln(MessageView.TITLE.getMessage());
 		this.secretCombinationView = new SecretCombinationView(startController);
+		startController.getClearSecretCombination().forEach(e -> this.console.write(e.toString() + " "));
+		this.console.writeln();
 		this.secretCombinationView.writeln();
 	}
 

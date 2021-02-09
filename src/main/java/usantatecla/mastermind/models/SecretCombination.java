@@ -1,6 +1,7 @@
 package usantatecla.mastermind.models;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 import usantatecla.mastermind.types.Color;
@@ -16,6 +17,10 @@ class SecretCombination extends Combination {
 			this.colors.remove(random.nextInt(this.colors.size()));
 		}
 		Collections.shuffle(this.colors);
+	}
+
+	public List<Color> getClearSecretCombination(){
+		return this.colors;
 	}
 
 	Result getResult(ProposedCombination proposedCombination) {
