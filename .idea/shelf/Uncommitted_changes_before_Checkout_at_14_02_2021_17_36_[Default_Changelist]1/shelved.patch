@@ -1,0 +1,64 @@
+Index: src/main/java/usantatecla/mastermind/models/Game.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package usantatecla.mastermind.models;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\nimport usantatecla.mastermind.types.Color;\r\n\r\npublic class Game {\r\n\r\n\tprivate static final int MAX_LONG = 10;\r\n\r\n\tprivate SecretCombination secretCombination;\r\n\r\n\tprivate List<ProposedCombination> proposedCombinations;\r\n\r\n\tprivate List<Result> results;\r\n\r\n\tprivate int attempts;\r\n\r\n\tpublic Game() {\r\n\t\tthis.clear();\r\n\t}\r\n\r\n\tpublic void clear() {\r\n\t\tthis.secretCombination = new SecretCombination();\r\n\t\tthis.proposedCombinations = new ArrayList<ProposedCombination>();\r\n\t\tthis.results = new ArrayList<Result>();\r\n\t\tthis.attempts = 0;\r\n\t}\r\n\r\n\tpublic void addProposedCombination(List<Color> colors) {\r\n\t\tProposedCombination proposedCombination = new ProposedCombination(colors);\r\n\t\tthis.proposedCombinations.add(proposedCombination);\r\n\t\tthis.results.add(this.secretCombination.getResult(proposedCombination));\r\n\t\tthis.attempts++;\r\n\t}\r\n\r\n\tpublic List<Color> getClearSecretCombination(){\r\n\t\treturn this.secretCombination.getClearSecretCombination();\r\n\t}\r\n\r\n\tpublic boolean isLooser() {\r\n\t\treturn this.attempts == Game.MAX_LONG;\r\n\t}\r\n\t\r\n\tpublic boolean isWinner() {\r\n\t\treturn this.results.get(this.attempts-1).isWinner();\r\n\t}\r\n\r\n\tpublic int getAttempts() {\r\n\t\treturn this.attempts;\r\n\t}\r\n\r\n\tpublic List<Color> getColors(int position) {\r\n\t\treturn this.proposedCombinations.get(position).colors;\r\n\t}\r\n\r\n\tpublic int getBlacks(int position) {\r\n\t\treturn this.results.get(position).getBlacks();\r\n\t}\r\n\r\n\tpublic int getWhites(int position) {\r\n\t\treturn this.results.get(position).getWhites();\r\n\t}\r\n\r\n\tpublic int getWidth() {\r\n\t\treturn Combination.getWidth();\r\n\t}\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/usantatecla/mastermind/models/Game.java b/src/main/java/usantatecla/mastermind/models/Game.java
+--- a/src/main/java/usantatecla/mastermind/models/Game.java	
++++ b/src/main/java/usantatecla/mastermind/models/Game.java	
+@@ -8,13 +8,9 @@
+ public class Game {
+ 
+ 	private static final int MAX_LONG = 10;
+-
+ 	private SecretCombination secretCombination;
+-
+ 	private List<ProposedCombination> proposedCombinations;
+-
+ 	private List<Result> results;
+-
+ 	private int attempts;
+ 
+ 	public Game() {
+@@ -67,4 +63,13 @@
+ 		return Combination.getWidth();
+ 	}
+ 
++	public GameMemento CreateMemento(){
++		return new GameMemento(this.proposedCombinations);
++	}
++
++	public void set(GameMemento gameMemento){
++		this.proposedCombinations = gameMemento.getProposedCombinationList();
++		this.attempts = gameMemento.getAttempts();
++	}
++
+ }
+Index: src/main/java/usantatecla/mastermind/views/console/ProposedCombinationMenu.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package usantatecla.mastermind.views.console;\r\n\r\nimport usantatecla.mastermind.controllers.ProposalController;\r\nimport usantatecla.mastermind.types.Color;\r\nimport usantatecla.mastermind.types.Error;\r\nimport usantatecla.mastermind.views.MessageView;\r\nimport usantatecla.utils.Console;\r\nimport usantatecla.utils.Menu;\r\n\r\nimport java.util.List;\r\n\r\npublic class ProposedCombinationMenu extends Menu {\r\n\r\n    public ProposedCombinationMenu(ProposalController proposalController){\r\n\t\tnew ProposedCombinationCommand(proposalController).execute();\r\n\t\tSystem.out.println(\"dddd\");\r\n\t\tif (proposalController.getAttempts() > 0){\r\n\t\t\tnew UndoCommand(proposalController).execute();\r\n\t\t}\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/src/main/java/usantatecla/mastermind/views/console/ProposedCombinationMenu.java b/src/main/java/usantatecla/mastermind/views/console/ProposedCombinationMenu.java
+--- a/src/main/java/usantatecla/mastermind/views/console/ProposedCombinationMenu.java	
++++ b/src/main/java/usantatecla/mastermind/views/console/ProposedCombinationMenu.java	
+@@ -12,10 +12,12 @@
+ public class ProposedCombinationMenu extends Menu {
+ 
+     public ProposedCombinationMenu(ProposalController proposalController){
+-		new ProposedCombinationCommand(proposalController).execute();
+-		System.out.println("dddd");
+-		if (proposalController.getAttempts() > 0){
+-			new UndoCommand(proposalController).execute();
+-		}
++    	//this.addComand(new ProposedCombinationCommand(proposalController));
++
++//		new ProposedCombinationCommand(proposalController).execute();
++//		System.out.println("dddd");
++//		if (proposalController.getAttempts() > 0){
++//			new UndoCommand(proposalController).execute();
++//		}
+     }
+ }

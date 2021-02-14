@@ -1,0 +1,66 @@
+Index: src/main/java/usantatecla/mastermind/views/console/ProposalView.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package usantatecla.mastermind.views.console;\r\n\r\nimport java.util.List;\r\n\r\nimport usantatecla.mastermind.controllers.ProposalController;\r\nimport usantatecla.mastermind.types.Color;\r\nimport usantatecla.mastermind.types.Error;\r\nimport usantatecla.mastermind.views.console.ErrorView;\r\nimport usantatecla.utils.WithConsoleView;\r\nimport usantatecla.mastermind.views.MessageView;\r\n\r\nclass ProposalView extends WithConsoleView {\r\n\r\n\tvoid interact(ProposalController proposalController) {\r\n\t\tnew ProposedCombinationMenu(proposalController).execute();\r\n\t\tif (proposalController.getAttempts() > 0){\r\n\t\t}\r\n\t}\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/usantatecla/mastermind/views/console/ProposalView.java b/src/main/java/usantatecla/mastermind/views/console/ProposalView.java
+--- a/src/main/java/usantatecla/mastermind/views/console/ProposalView.java	
++++ b/src/main/java/usantatecla/mastermind/views/console/ProposalView.java	
+@@ -12,7 +12,9 @@
+ class ProposalView extends WithConsoleView {
+ 
+ 	void interact(ProposalController proposalController) {
++
+ 		new ProposedCombinationMenu(proposalController).execute();
++		//new ProposedCombinationMenu(proposalController).execute();
+ 		if (proposalController.getAttempts() > 0){
+ 		}
+ 	}
+Index: src/main/java/usantatecla/mastermind/models/GameMemento.java
+===================================================================
+diff --git a/src/main/java/usantatecla/mastermind/models/GameMemento.java b/src/main/java/usantatecla/mastermind/models/GameMemento.java
+new file mode 100644
+--- /dev/null	
++++ b/src/main/java/usantatecla/mastermind/models/GameMemento.java	
+@@ -0,0 +1,21 @@
++package usantatecla.mastermind.models;
++
++
++import java.util.List;
++
++public class GameMemento {
++
++    private List<ProposedCombination> proposedCombinationList;
++
++    public GameMemento(List<ProposedCombination> proposedCombinationList){
++           this.proposedCombinationList = proposedCombinationList;
++    }
++
++    public List<ProposedCombination> getProposedCombinationList(){
++        return this.proposedCombinationList;
++    }
++
++    public int getAttempts(){
++        return this.proposedCombinationList.size();
++    }
++}
+Index: src/main/java/usantatecla/mastermind/views/console/StartView.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package usantatecla.mastermind.views.console;\r\n\r\nimport usantatecla.mastermind.controllers.StartController;\r\nimport usantatecla.mastermind.views.MessageView;\r\nimport usantatecla.utils.Menu;\r\nimport usantatecla.utils.WithConsoleView;\r\n\r\nclass StartView extends WithConsoleView {\r\n\t\r\n\tprivate SecretCombinationView secretCombinationView;\r\n\t\r\n\tvoid interact(StartController startController) {\r\n\t\tthis.console.writeln(MessageView.TITLE.getMessage());\r\n\t\tthis.secretCombinationView = new SecretCombinationView(startController);\r\n\t\tstartController.getClearSecretCombination().forEach(e -> this.console.write(e.toString() + \" \"));\r\n\t\tthis.console.writeln();\r\n\t\tthis.secretCombinationView.writeln();\r\n\t\tstartController.start();\r\n\t}\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/usantatecla/mastermind/views/console/StartView.java b/src/main/java/usantatecla/mastermind/views/console/StartView.java
+--- a/src/main/java/usantatecla/mastermind/views/console/StartView.java	
++++ b/src/main/java/usantatecla/mastermind/views/console/StartView.java	
+@@ -10,6 +10,7 @@
+ 	private SecretCombinationView secretCombinationView;
+ 	
+ 	void interact(StartController startController) {
++
+ 		this.console.writeln(MessageView.TITLE.getMessage());
+ 		this.secretCombinationView = new SecretCombinationView(startController);
+ 		startController.getClearSecretCombination().forEach(e -> this.console.write(e.toString() + " "));
