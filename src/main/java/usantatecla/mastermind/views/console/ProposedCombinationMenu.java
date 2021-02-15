@@ -15,7 +15,7 @@ public class ProposedCombinationMenu extends Menu {
 		new ProposedCombinationCommand(proposalController).execute();
 		System.out.println("dddd");
 		if (proposalController.getAttempts() > 0){
-			new UndoCommand(proposalController).execute();
+			//new UndoCommand(proposalController).execute();
 		}
     }
 }
