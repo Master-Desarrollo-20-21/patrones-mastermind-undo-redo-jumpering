@@ -71,7 +71,8 @@ public class Game {
 		return new GameMemento(this.proposedCombinations, this.results);
 	}
 
-	public void set(GameMemento gameMemento){
+	public void set(GameMemento gameMemento, int indexForAttempts){
+		this.attempts = indexForAttempts;
 		this.proposedCombinations = gameMemento.getProposedCombinations();
 		this.results = gameMemento.getResults();
 	}

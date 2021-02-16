@@ -4,17 +4,35 @@ import java.util.List;
 
 import usantatecla.mastermind.models.Combination;
 import usantatecla.mastermind.models.Game;
+import usantatecla.mastermind.models.GameRegistry;
 import usantatecla.mastermind.models.State;
 import usantatecla.mastermind.types.Color;
 import usantatecla.mastermind.types.Error;
+import usantatecla.utils.Console;
 
 public class ProposalController extends Controller {
+
+	private GameRegistry gameRegistry = new GameRegistry(this.game);//todo eliminar
 
 	public ProposalController(Game game, State state) {
 		super(game, state);
 	}
 
 	public Error addProposedCombination(List<Color> colors) {
+
+		gameRegistry.register();
+		Console console = new Console();
+		int userOption = console.readInt("1 undo\n2 redo\n3 continue");
+		if (userOption == 1){
+			gameRegistry.undo();
+		}
+		if (userOption == 2){
+			gameRegistry.redo();
+		}
+
+
+
+
 		Error error = null;
 		if (colors.size() != Combination.getWidth()) {
 			error = Error.WRONG_LENGTH;
@@ -37,7 +55,7 @@ public class ProposalController extends Controller {
 				this.state.next();
 			}
 		}
-		return error;	
+		return error;
 	}
 
 	public boolean isWinner() {
