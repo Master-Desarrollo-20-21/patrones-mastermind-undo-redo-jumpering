@@ -31,4 +31,12 @@ public class GameRegistry {
         this.index++;
         this.game.set(this.gameMementoList.get(this.index), index);
     }
+
+    public boolean isUndoable(){
+        return this.gameMementoList.size() > 0;
+    }
+
+    public boolean isRedoable(){
+        return this.gameMementoList.size() > 0;
+    }
 }

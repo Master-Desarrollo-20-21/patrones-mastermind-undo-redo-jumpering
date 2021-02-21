@@ -12,10 +12,9 @@ import java.util.List;
 public class ProposedCombinationMenu extends Menu {
 
     public ProposedCombinationMenu(ProposalController proposalController){
-		new ProposedCombinationCommand(proposalController).execute();
-		System.out.println("dddd");
-		if (proposalController.getAttempts() > 0){
-			//new UndoCommand(proposalController).execute();
-		}
+
+		this.addComand(new ProposedCombinationCommand( proposalController ));
+		this.addComand(new UndoCommand( proposalController ));
+
     }
 }

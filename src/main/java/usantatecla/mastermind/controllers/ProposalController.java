@@ -12,26 +12,21 @@ import usantatecla.utils.Console;
 
 public class ProposalController extends Controller {
 
-	private GameRegistry gameRegistry = new GameRegistry(this.game);//todo eliminar
-
-	public ProposalController(Game game, State state) {
-		super(game, state);
+	public ProposalController(Session session) {
+		super(session);
 	}
 
 	public Error addProposedCombination(List<Color> colors) {
 
-		gameRegistry.register();
-		Console console = new Console();
-		int userOption = console.readInt("1 undo\n2 redo\n3 continue");
-		if (userOption == 1){
-			gameRegistry.undo();
-		}
-		if (userOption == 2){
-			gameRegistry.redo();
-		}
-
-
-
+//		gameRegistry.register();
+//		Console console = new Console();
+//		int userOption = console.readInt("1 undo\n2 redo\n3 continue");
+//		if (userOption == 1){
+//			gameRegistry.undo();
+//		}
+//		if (userOption == 2){
+//			gameRegistry.redo();
+//		}
 
 		Error error = null;
 		if (colors.size() != Combination.getWidth()) {
@@ -50,36 +45,36 @@ public class ProposalController extends Controller {
 			}
 		}
 		if (error == null){
-			this.game.addProposedCombination(colors);
-			if (this.game.isWinner() || this.game.isLooser()) {
-				this.state.next();
+			this.session.addProposedCombination(colors);
+			if (this.session.isWinner() || this.session.isLooser()) {
+				this.session.next();
 			}
 		}
 		return error;
 	}
 
 	public boolean isWinner() {
-		return this.game.isWinner();
+		return this.session.isWinner();
 	}
 
 	public boolean isLooser() {
-		return this.game.isLooser();
+		return this.session.isLooser();
 	}
 	
 	public int getAttempts() {
-		return this.game.getAttempts();
+		return this.session.getAttempts();
 	}
 
 	public List<Color> getColors(int position) {
-		return this.game.getColors(position);
+		return this.session.getColors(position);
 	}
 
 	public int getBlacks(int position) {
-		return this.game.getBlacks(position);
+		return this.session.getBlacks(position);
 	}
 
 	public int getWhites(int position) {
-		return this.game.getWhites(position);
+		return this.session.getWhites(position);
 	}
 	
 	@Override

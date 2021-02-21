@@ -5,7 +5,6 @@ import java.util.List;
 
 import usantatecla.mastermind.controllers.ProposalController;
 import usantatecla.mastermind.types.Color;
-import usantatecla.mastermind.views.console.ColorView;
 import usantatecla.utils.WithConsoleView;
 import usantatecla.mastermind.views.MessageView;
 
@@ -15,6 +14,7 @@ class ProposedCombinationView extends WithConsoleView {
 	
 	ProposedCombinationView(ProposalController proposalController) {
 		this.proposalController = proposalController;
+
 	}
 	
 	void write(int position) {
