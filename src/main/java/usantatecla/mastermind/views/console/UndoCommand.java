@@ -14,12 +14,11 @@ public class UndoCommand extends Command {
 
     @Override
     protected void execute() {
-
-
+        this.proposalController.undo();
     }
 
     @Override
     public boolean isActive() {
-        return false;
+        return this.proposalController.isUndoable();
     }
 }

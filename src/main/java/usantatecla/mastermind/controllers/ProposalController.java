@@ -12,8 +12,11 @@ import usantatecla.utils.Console;
 
 public class ProposalController extends Controller {
 
+	private UndoController undoController;
+
 	public ProposalController(Session session) {
 		super(session);
+		this.undoController = new UndoController(session);
 	}
 
 	public Error addProposedCombination(List<Color> colors) {
@@ -75,6 +78,14 @@ public class ProposalController extends Controller {
 
 	public int getWhites(int position) {
 		return this.session.getWhites(position);
+	}
+
+	public void undo(){
+		this.undoController.undo();
+	}
+
+	public boolean isUndoable(){
+		return this.session.isUndoable();
 	}
 	
 	@Override

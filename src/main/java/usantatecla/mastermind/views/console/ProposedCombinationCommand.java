@@ -21,9 +21,7 @@ public class ProposedCombinationCommand extends Command {
 
     @Override
     public void execute() {
-
-        System.out.println("...dentro de  comando");
-        Console console = new Console();
+    	Console console = new Console();
         Error error;
 		do {
 			List<Color> colors = new ProposedCombinationView(proposalController).read();

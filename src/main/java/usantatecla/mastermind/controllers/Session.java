@@ -63,6 +63,7 @@ public class Session {
 
     public void addProposedCombination(List<Color> colors){
         this.game.addProposedCombination(colors);
+        gameRegistry.register();
     }
 
     public boolean isWinner(){
