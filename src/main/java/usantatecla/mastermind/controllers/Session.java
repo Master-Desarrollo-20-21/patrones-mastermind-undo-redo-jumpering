@@ -29,7 +29,8 @@ public class Session {
     }
 
     public boolean isRedoable() {
-        return this.gameRegistry.isRedoable();
+        //return this.gameRegistry.isRedoable();
+        return true;
     }
 
     public void redo() {

@@ -22,7 +22,7 @@ public class Menu {
                     console.writeln((i + 1) + ". " + this.commandList.get(i).getTitle());
                 }
             }
-            option = console.readInt("aquí tú número: ");
+            option = console.readInt("Opción número: ");
         } while (error);
         this.commandList.get(option - 1).execute();
     }

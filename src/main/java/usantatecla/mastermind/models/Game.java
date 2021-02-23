@@ -15,7 +15,7 @@ public class Game {
 
 	private List<Result> results;
 
-	private int attempts;
+	//private int attempts;
 
 	public Game() {
 		this.clear();
@@ -25,14 +25,14 @@ public class Game {
 		this.secretCombination = new SecretCombination();
 		this.proposedCombinations = new ArrayList<ProposedCombination>();
 		this.results = new ArrayList<Result>();
-		this.attempts = 0;
+		//this.attempts = 0;
 	}
 
 	public void addProposedCombination(List<Color> colors) {
 		ProposedCombination proposedCombination = new ProposedCombination(colors);
 		this.proposedCombinations.add(proposedCombination);
 		this.results.add(this.secretCombination.getResult(proposedCombination));
-		this.attempts++;
+		//this.attempts++;
 	}
 
 	public List<Color> getClearSecretCombination(){
@@ -40,15 +40,15 @@ public class Game {
 	}
 
 	public boolean isLooser() {
-		return this.attempts == Game.MAX_LONG;
+		return this.proposedCombinations.size() == Game.MAX_LONG;
 	}
 	
 	public boolean isWinner() {
-		return this.results.get(this.attempts-1).isWinner();
+		return this.results.get(this.proposedCombinations.size()-1).isWinner();
 	}
 
 	public int getAttempts() {
-		return this.attempts;
+		return this.proposedCombinations.size();
 	}
 
 	public List<Color> getColors(int position) {
@@ -71,8 +71,7 @@ public class Game {
 		return new GameMemento(this.proposedCombinations, this.results);
 	}
 
-	public void set(GameMemento gameMemento, int indexForAttempts){
-		this.attempts = indexForAttempts;
+	public void set(GameMemento gameMemento){
 		this.proposedCombinations = gameMemento.getProposedCombinations();
 		this.results = gameMemento.getResults();
 	}

@@ -11,8 +11,8 @@ public class GameMemento {
     public GameMemento(List<ProposedCombination> proposedCombinations, List<Result> results){
         this.proposedCombinations = new ArrayList<>();
         this.results = new ArrayList<>();
-        //proposedCombinations.forEach(e -> this.proposedCombinations.add(e.copy()));
-        //results.forEach(e -> this.results.add(e.copy()));
+        //proposedCombinations.forEach(e -> this.proposedCombinations.add(e.copy()));//todo
+        //results.forEach(e -> this.results.add(e.copy()));//todo
         for (ProposedCombination proposedCombination: proposedCombinations) {
             this.proposedCombinations.add(proposedCombination);
         }

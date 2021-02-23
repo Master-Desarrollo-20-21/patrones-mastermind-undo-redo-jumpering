@@ -15,6 +15,12 @@ public class UndoCommand extends Command {
     @Override
     protected void execute() {
         this.proposalController.undo();
+        new AttemptsView(proposalController).writeln();
+        for (int i = 0; i < proposalController.getAttempts(); i++) {
+            new ProposedCombinationView(proposalController).write(i);
+            new ResultView(proposalController).writeln(i);
+        }
+
     }
 
     @Override
