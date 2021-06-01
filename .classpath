@@ -41,4 +41,9 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
+	<dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-engine</artifactId>
+        <version>5.4.2</version>
+    </dependency>
 </classpath>
